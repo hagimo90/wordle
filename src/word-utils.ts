@@ -1,5 +1,5 @@
 import dict from './dict.json'
-
+const word = getRandomWord()
 export function getRandomWord() {
   const randomIndex = Math.floor(Math.random() * dict.length)
 
@@ -13,11 +13,12 @@ export enum LetterState {
 }
 export function computeGuess(
   guess: string,
-  answerString: string
+  answerString: string = word
 ): LetterState[] {
   const guessArray = guess.split('')
   const answerArray = answerString.split('')
   const result: LetterState[] = []
+  console.log(word)
   if (guess.length !== answerString.length) {
     return result
   }
