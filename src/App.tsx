@@ -1,7 +1,9 @@
 import WordRow from './WordRow'
 import { useState } from 'react'
+import { useStore } from './store'
 export default function App() {
   const [guess, setGuess] = useState('')
+  const store = useStore()
   return (
     <div className="mx-auto w-96">
       <header className="my-2 border-b border-gray-500 pb-2">
