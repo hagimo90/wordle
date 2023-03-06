@@ -44,4 +44,14 @@ describe('compute-guess', () => {
       LetterState.Miss
     ])
   })
+
+  it('only one match when two letters are present', () => {
+    expect(computeGuess('boost', 'colir')).toEqual([
+      LetterState.Miss,
+      LetterState.Match,
+      LetterState.Miss,
+      LetterState.Miss,
+      LetterState.Miss
+    ])
+  })
 })
