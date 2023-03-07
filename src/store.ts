@@ -7,11 +7,12 @@ interface StoreState {
   guesses: string[]
   addGuess: (guess: string) => void
 }
+const answer = getRandomWord()
 export const useStore = create<StoreState>(
   persist(
     (set) => ({
-      answer: getRandomWord(),
-      guesses: ['hello', 'penny', 'solar'],
+      answer: answer,
+      guesses: [],
       addGuess: (guess: string) => {
         set((state) => ({
           guesses: [...state.guesses, guess]
