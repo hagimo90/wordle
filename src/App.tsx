@@ -7,12 +7,11 @@ const GUESS_LENGTH = 6
 export default function App() {
   const [guess, setGuess] = useState('')
   const store = useStore()
+  const isGameOver = store.guesses.length === GUESS_LENGTH
 
   let rows = [...store.guesses] //, ...Array(numberOfGuessesReamining).fill('')
   if (rows.length < GUESS_LENGTH) {
     rows.push(guess)
-  } else if (rows.length === GUESS_LENGTH) {
-    useStore.persist.clearStorage()
   }
   const numberOfGuessesReamining = GUESS_LENGTH - rows.length
   rows = rows.concat(Array(numberOfGuessesReamining).fill(''))
@@ -21,14 +20,16 @@ export default function App() {
     const newGuess = e.target.value
     if (newGuess.length === 5) {
       store.addGuess(newGuess)
+      console.log(isGameOver)
       setGuess('')
       return
     }
+
     setGuess(newGuess)
   }
 
   return (
-    <div className="mx-auto w-96">
+    <div className="relative mx-auto w-96">
       <header className="my-2 border-b border-gray-500 pb-2">
         <h1 className="text-center text-4xl">Reacdle</h1>
         <div>
@@ -38,6 +39,7 @@ export default function App() {
             value={guess}
             placeholder="Put your guess here"
             onChange={inputOnChange}
+            disabled={isGameOver}
           />
         </div>
       </header>
@@ -46,6 +48,20 @@ export default function App() {
           <WordRow key={index} letters={word} />
         ))}
       </main>
+      {isGameOver && (
+        <div
+          role="modal"
+          className="absolute inset-x-0 top-1/4 mx-auto w-3/4 rounded border border-gray-800 bg-white p-6 text-center"
+        >
+          Game Over!
+          <button
+            onClick={store.newGame}
+            className="m-auto mt-4 block rounded border border-gray-800 bg-green-200 p-2 text-center shadow"
+          >
+            Play Again
+          </button>
+        </div>
+      )}
     </div>
   )
 }
