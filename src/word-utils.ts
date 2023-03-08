@@ -39,12 +39,12 @@ export function computeGuess(
     }
   })
   result.forEach((curResult, resultIndex) => {
-    if (curResult !== LetterState.present) {
+    if (curResult !== LetterState.Present) {
       return
     }
     const guessLetter = guessArray[resultIndex]
 
-    answer.forEach((currentAnswerLetter, answerIndex) => {
+    answerArray.forEach((currentAnswerLetter, answerIndex) => {
       if (currentAnswerLetter !== guessLetter) {
         return
       }
