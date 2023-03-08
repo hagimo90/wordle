@@ -27,11 +27,11 @@ export default function WordRow({ letters: lettersProp = '' }: WordRowProps) {
 function CharacterBox({ value, state }: CharacterBoxProps) {
   const stateStyles = state == null ? '' : CharacterStateStyles[state]
   return (
-    <div
-      className={` mx-1 inline-block border border-gray-500 p-4 text-center text-2xl font-bold uppercase ${stateStyles}`}
+    <span
+      className={`mx-1 inline-block border border-gray-500 p-4 text-center text-2xl font-bold uppercase ${stateStyles} before:inline-block before:content-['_']`}
     >
       {value}
-    </div>
+    </span>
   )
 }
 const CharacterStateStyles = {
